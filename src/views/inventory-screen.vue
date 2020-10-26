@@ -10,6 +10,7 @@
 <script>
 import Catalogue from '@/services/catalogue-service.js'
 import CatalogueItem from '@/components/catalogue-item.vue'
+
 export default {
     name: 'InventoryScreen',
     components: {CatalogueItem},
@@ -19,7 +20,7 @@ export default {
         }
     },
     mounted() {
-        this.items = Catalogue.getItems();
+        this.items = Catalogue.items;
     }
 }
 </script>
