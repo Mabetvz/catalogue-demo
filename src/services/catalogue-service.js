@@ -3,12 +3,12 @@ export default {
         {
             title: 'Pride and Prejudice',
             author: 'Jane Austen',
-            id: 1
+            id: 'jane-austen-pride-and-prejudice'
         },
         {
             title: 'The Chronicles of Narnia',
-            author: 'C.S. Lewis',
-            id: 2
+            author: 'C S Lewis',
+            id: 'c-s-lewis-the-chronicles-of-narnia'
         }
     ],
     
@@ -17,15 +17,18 @@ export default {
     },
 
     add(title, author) {
-        let item = {title: title, author: author}
-        item.id = parseInt(this.items[this.items.length - 1].id) + 1
-        this.items.push(item)
-        this.saveList()
+        if (!this.itemExists(title, author)) {
+            let item = {title: title, author: author}
+            item.id = author.toLowerCase().replace(' ', '-') + '-' + title.toLowerCase().replace(' ', '-')
+            this.items.push(item)
+            this.saveList()
+        } else {
+            alert('That item already exists')
+        }
     },
 
     delete(item) {
         let index = this.items.indexOf(item)
-        console.log(index)
         if (index) {
             this.items.splice(index, 1)
         }
@@ -34,11 +37,17 @@ export default {
 
     update(edited) {
         let item = this.items.find(i => i.id === edited.id)
-        if (item) {
+        if (!this.itemExists(item.title, item.author)) {
             item.title = edited.title
             item.author = edited.author
+            this.saveList()
+        } else {
+            alert('These changes conflict with an item that laready exists')
         }
-        this.saveList()
+    },
+    
+    itemExists(title, author) {
+        return this.items.find(item => item.title.toLowerCase() === title.toLowerCase() && item.author.toLowerCase() === author.toLowerCase())
     },
     
     saveList() {

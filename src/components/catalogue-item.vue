@@ -9,7 +9,7 @@
                 <span>Author</span>
                 <input v-model="newAuthor" placeholder="author" />
             </div>
-            <div class="item-options">
+            <div>
                 <button class="button-yellow" @click="saveItem">save</button>
                 <button @click="toggleEdit">
                     {{addNew ? 'close' : 'cancel'}}
@@ -21,7 +21,7 @@
                 <strong>{{item.title}}</strong><br />
                 <em>{{item.author}}</em>
             </div>
-            <div class="item-options hideable-options">
+            <div class="hideable-options">
                 <button @click="toggleEdit">edit</button>
                 <button class="button-red" @click="showConfirm = true">delete</button>
             </div>
@@ -30,7 +30,7 @@
             <div v-if="showConfirm" class="confirm-action-wrapper">
                 <div class="confirm-action-card">
                     <h3>Are you sure you want to remove <em>"{{item.title}}"</em> permanently?</h3>
-                    <div class="item-options">
+                    <div>
                         <button class="button-red" @click="removeItem">Yes, delete</button>
                         <button @click="showConfirm = false">No, take me back</button>
                     </div>
@@ -59,13 +59,14 @@ export default {
     },
     methods: {
         saveItem() {
-            if (this.newTitle && this.newAuthor)
-            if (this.addNew) {
-                CatalogueService.add(this.newTitle, this.newAuthor)
-                this.newTitle = ''
-                this.newAuthor = ''
-            } else {
-                this.editItem()
+            if (this.newTitle && this.newAuthor) {
+                if (this.addNew) {
+                    CatalogueService.add(this.newTitle, this.newAuthor)
+                    this.newTitle = ''
+                    this.newAuthor = ''
+                } else {
+                    this.editItem()
+                }
             }
         },
         removeItem() {
@@ -106,10 +107,6 @@ export default {
 }
 .catalogue-item:hover .hideable-options {
     display: block;
-}
-.catalogue-item .item-options button {
-    cursor: pointer;
-    margin: 5px;
 }
 
 .catalogue-item .confirm-action-wrapper {
