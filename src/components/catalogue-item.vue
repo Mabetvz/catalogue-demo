@@ -1,6 +1,6 @@
 <template>
-    <div v-if="item" class="catalogue-item">
-        <div v-if="isEditing">
+    <div v-if="item || addNew" class="catalogue-item">
+        <div v-if="isEditing || addNew">
             <div>
                 <span>Title</span>
                 <input v-model="newTitle" placeholder="title" />
@@ -10,8 +10,10 @@
                 <input v-model="newAuthor" placeholder="author" />
             </div>
             <div class="item-options">
-                <button class="button-yellow" @click="editItem">save</button>
-                <button @click="toggleEdit">cancel</button>
+                <button class="button-yellow" @click="saveItem">save</button>
+                <button @click="toggleEdit">
+                    {{addNew ? 'close' : 'cancel'}}
+                </button>
             </div>
         </div>
         <div v-else>
@@ -33,7 +35,8 @@ import CatalogueService from '@/services/catalogue-service.js'
 export default {
     name: 'CatalogueItem',
     props: {
-        item: Object
+        item: Object,
+        addNew: Boolean,
     },
     data () {
         return {
@@ -43,6 +46,16 @@ export default {
         }
     },
     methods: {
+        saveItem() {
+            if (this.newTitle && this.newAuthor)
+            if (this.addNew) {
+                CatalogueService.add(this.newTitle, this.newAuthor)
+                this.newTitle = ''
+                this.newAuthor = ''
+            } else {
+                this.editItem()
+            }
+        },
         removeItem() {
             CatalogueService.delete(this.item)
         },
@@ -53,9 +66,13 @@ export default {
             this.isEditing = false
         },
         toggleEdit() {
-            this.newTitle = this.item.title
-            this.newAuthor = this.item.author
-            this.isEditing = !this.isEditing
+            if (this.addNew) {
+                this.$emit('cancel-add')
+            } else {
+                this.newTitle = this.item.title
+                this.newAuthor = this.item.author
+                this.isEditing = !this.isEditing
+            }
         }
     }
 }
