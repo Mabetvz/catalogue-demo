@@ -29,4 +29,23 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/*  */
+#app button {
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  transition: all 0.25s ease;
+}
+#app button:hover, #app button:active {
+  box-shadow: 0 0 3px rgba(0,0,0,0.35) inset;
+}
+
+#app button.button-yellow {
+  background-color: #ffe680;
+}
+#app button.button-red {
+  background-color: #de8787;
+}
 </style>

@@ -25,24 +25,18 @@ export default {
 
     delete(item) {
         let index = this.items.indexOf(item)
+        console.log(index)
         if (index) {
             this.items.splice(index, 1)
         }
         this.saveList()
     },
 
-    updateAuthor(id, val) {
-        let item = this.items.find(i => i.id === id)
+    update(edited) {
+        let item = this.items.find(i => i.id === edited.id)
         if (item) {
-            item.author = val
-        }
-        this.saveList()
-    },
-
-    updateTitle(id, val) {
-        let item = this.items.find(i => i.id === id)
-        if (item) {
-            item.title = val
+            item.title = edited.title
+            item.author = edited.author
         }
         this.saveList()
     },

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Catalogue from '@/services/catalogue-service.js'
+import CatalogueService from '@/services/catalogue-service.js'
 import CatalogueItem from '@/components/catalogue-item.vue'
 
 export default {
@@ -20,7 +20,7 @@ export default {
         }
     },
     mounted() {
-        this.items = Catalogue.items;
+        this.items = CatalogueService.items;
     }
 }
 </script>
