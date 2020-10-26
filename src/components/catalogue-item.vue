@@ -1,5 +1,5 @@
 <template>
-    <div v-if="item || addNew" class="catalogue-item">
+    <div v-if="(item && matchesSearch) || addNew" class="catalogue-item">
         <div v-if="isEditing || addNew">
             <div>
                 <span>Title</span>
@@ -48,6 +48,8 @@ export default {
     props: {
         item: Object,
         addNew: Boolean,
+        filterProp: String,
+        searchCrit: String,
     },
     data () {
         return {
@@ -55,6 +57,11 @@ export default {
             newAuthor: '',
             isEditing: false,
             showConfirm: false,
+        }
+    },
+    computed: {
+        matchesSearch() {
+            return this.filterProp === 'none' || this.item[this.filterProp].toLowerCase().includes(this.searchCrit.toLowerCase())
         }
     },
     methods: {
@@ -87,7 +94,7 @@ export default {
                 this.newAuthor = this.item.author
                 this.isEditing = !this.isEditing
             }
-        }
+        },
     }
 }
 </script>

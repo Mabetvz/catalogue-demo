@@ -9,11 +9,20 @@
                     <option>title</option>
                 </select>
             </div>
-            <button v-if="!showCreate" @click="showCreate = !showCreate">add items</button>
+            <div>
+                <span>Filter by:</span>
+                <select v-model="filterBy">
+                    <option>none</option>
+                    <option>author</option>
+                    <option>title</option>
+                </select>
+                <input v-if="filterBy !== 'none'" v-model="search" placeholder="search" />
+            </div>
         </div>
         <div class="inventory-wrapper">
+            <button v-if="!showCreate" @click="showCreate = !showCreate">add items</button>
             <catalogue-item v-if="showCreate" :addNew="true" @cancel-add="showCreate = false"></catalogue-item>
-            <catalogue-item v-for="item in items" :key="item.id" :item="item" />
+            <catalogue-item v-for="item in items" :key="item.id" :item="item" :filterProp="filterBy" :searchCrit="search" />
         </div>
     </div>
 </template>
@@ -30,6 +39,8 @@ export default {
             items: [],
             showCreate: false,
             sortBy: 'author',
+            filterBy: 'none',
+            search: '',
         }
     },
     methods: {
@@ -37,7 +48,7 @@ export default {
             this.items.sort((a, b) => {
                 return a[this.sortBy] > b[this.sortBy] ? 1 : -1
             })
-        }
+        },
     },
     mounted() {
         this.items = CatalogueService.items
@@ -47,7 +58,7 @@ export default {
     watch: {
         sortBy() {
             this.sortItems()
-        }
+        },
     }
 }
 </script>
@@ -55,10 +66,15 @@ export default {
 <style>
 .inventory-screen .list-tools {
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
     margin-bottom: 20px;
 }
-.inventory-screen .list-tools button {
-    margin-top: 0;
+.inventory-screen .list-tools > div {
+    margin-right: 10px;
+}
+.inventory-screen .list-tools input {
+    margin-left: 5px;
 }
 </style>
