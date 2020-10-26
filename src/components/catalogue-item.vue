@@ -104,7 +104,7 @@ export default {
     margin: 5px;
     padding: 5px;
     border: solid 1px #ccc;
-    width: 250px;
+    width: 210px;
 }
 .catalogue-item input {
     margin: 4px;

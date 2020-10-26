@@ -19,9 +19,11 @@
                 <input v-if="filterBy !== 'none'" v-model="search" placeholder="search" />
             </div>
         </div>
-        <div class="inventory-wrapper">
-            <button v-if="!showCreate" @click="showCreate = !showCreate">add items</button>
+        <div class="inventory-add">
+            <button v-if="!showCreate" @click="showCreate = !showCreate">add item</button>
             <catalogue-item v-if="showCreate" :addNew="true" @cancel-add="showCreate = false"></catalogue-item>
+        </div>
+        <div class="inventory-wrapper">
             <catalogue-item v-for="item in items" :key="item.id" :item="item" :filterProp="filterBy" :searchCrit="search" />
         </div>
     </div>
@@ -76,5 +78,16 @@ export default {
 }
 .inventory-screen .list-tools input {
     margin-left: 5px;
+}
+.inventory-screen .inventory-wrapper, .inventory-screen .inventory-add {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .inventory-screen .inventory-wrapper, .inventory-screen .inventory-add {
+        justify-content: left;
+    }
 }
 </style>
