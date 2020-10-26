@@ -23,9 +23,20 @@
             </div>
             <div class="item-options hideable-options">
                 <button @click="toggleEdit">edit</button>
-                <button class="button-red" @click="removeItem">delete</button>
+                <button class="button-red" @click="showConfirm = true">delete</button>
             </div>
         </div>
+        <transition name="fade">
+            <div v-if="showConfirm" class="confirm-action-wrapper">
+                <div class="confirm-action-card">
+                    <h3>Are you sure you want to remove <em>"{{item.title}}"</em> permanently?</h3>
+                    <div class="item-options">
+                        <button class="button-red" @click="removeItem">Yes, delete</button>
+                        <button @click="showConfirm = false">No, take me back</button>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -42,7 +53,8 @@ export default {
         return {
             newTitle: '',
             newAuthor: '',
-            isEditing: false
+            isEditing: false,
+            showConfirm: false,
         }
     },
     methods: {
@@ -58,6 +70,7 @@ export default {
         },
         removeItem() {
             CatalogueService.delete(this.item)
+            this.showConfirm = false
         },
         editItem() {
             this.item.title = this.newTitle
@@ -96,6 +109,23 @@ export default {
 }
 .catalogue-item .item-options button {
     cursor: pointer;
-    margin: 2px;
+    margin: 5px;
+}
+
+.catalogue-item .confirm-action-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20vh;
+    background-color: rgba(0,0,0,0.5);
+    width: 100vw;
+    height: 100vh;
+}
+.catalogue-item .confirm-action-card {
+    position: absolute;
+    background-color: white;
+    width: 300px;
+    left: calc(50vw - 150px);
+    padding: 20px;
 }
 </style>

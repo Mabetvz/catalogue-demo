@@ -48,4 +48,12 @@
 #app button.button-red {
   background-color: #de8787;
 }
+
+/* transitions */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
