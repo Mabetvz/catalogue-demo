@@ -105,15 +105,17 @@ export default {
     padding: 5px;
     border: solid 1px #ccc;
     width: 210px;
+    position: relative;
 }
 .catalogue-item input {
     margin: 4px;
 }
 .catalogue-item .hideable-options {
-    display: none;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 .catalogue-item:hover .hideable-options {
-    display: block;
+    opacity: 1;
 }
 
 .catalogue-item .confirm-action-wrapper {
@@ -124,6 +126,7 @@ export default {
     background-color: rgba(0,0,0,0.5);
     width: 100vw;
     height: 100vh;
+    z-index: 2;
 }
 .catalogue-item .confirm-action-card {
     position: absolute;
