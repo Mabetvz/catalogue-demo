@@ -1,44 +1,44 @@
 export default {
     items: localStorage.getItem('catalogue') ? JSON.parse(localStorage.getItem('catalogue')) : [
         {
-            "title":"Pippie Langkous",
-            "author":"Astrid Lindgren",
-            "id":"astrid-lindgren-pippie-langkous"
+            title: "Pippie Langkous",
+            author: "Astrid Lindgren",
+            id: "astrid-lindgren-pippie-langkous"
         },
         {
-            "title":"The Chronicles of Narnia",
-            "author":"C S Lewis",
-            "id":"c-s-lewis-the-chronicles-of-narnia"
+            title: "The Chronicles of Narnia",
+            author: "C S Lewis",
+            id: "c-s-lewis-the-chronicles-of-narnia"
         },
         {
-            "title":"The Screwtape Letters",
-            "author":"C S Lewis",
-            "id":"c-s lewis-the-screwtape letters"
+            title: "The Screwtape Letters",
+            author: "C S Lewis",
+            id: "c-s lewis-the-screwtape letters"
         },
         {
-            "title":"Great Expectations",
-            "author":"Charles Dickens",
-            "id":"charles-dickens-great-expectations"
+            title: "Great Expectations",
+            author: "Charles Dickens",
+            id: "charles-dickens-great-expectations"
         },
         {
-            "title":"The Hiding Place",
-            "author":"Corrie ten Boom",
-            "id":"corrie-ten boom-the-hiding place"
+            title: "The Hiding Place",
+            author: "Corrie ten Boom",
+            id: "corrie-ten boom-the-hiding place"
         },
         {
-            "title":"Lady Suzan",
-            "author":"Jane Austen",
-            "id":"jane-austen-lady-suzan"
+            title: "Lady Suzan",
+            author: "Jane Austen",
+            id: "jane-austen-lady-suzan"
         },
         {
-            "title":"Pride and Prejudice",
-            "author":"Jane Austen",
-            "id":"jane-austen-pride-and-prejudice"
+            title: "Pride and Prejudice",
+            author: "Jane Austen",
+            id: "jane-austen-pride-and-prejudice"
         },
         {
-            "title":"Wuthering Heights",
-            "author":"Emily Bronte",
-            "id":"emily-bronte-wuthering-heights"
+            title: "Wuthering Heights",
+            author: "Emily Bronte",
+            id: "emily-bronte-wuthering-heights"
         }
     ],
     
